@@ -20,19 +20,40 @@
 	<div style="position:absolute; top:150px; left:499px;"><h3>Move cursor to avoid collision!</h3></div>
 	<div style="position:absolute; top:375px; left:575px; color:#009700; z-index:0;" id="cd"><h3>Collision Detected! Game Over!</h3></div>
 	<div style="position:absolute; top:300px; left:99px;"><h3><p><u>HOW TO PLAY:</u><br></p></h3></div>
-	<div style="position:absolute; top:330px; left:139px;"><h3><p>☺ Use your mouse/touchpad to move<br>cursor to save red dot from hitting<br>with moving white obstacles.</p></h3></div>
+	<div style="position:absolute; top:330px; left:139px;"><h3><p>☺ Use your mouse/touchpad to move<br> red ball from hitting with moving<br>white obstacles.</p></h3></div>
 	<div style="position:absolute; top:410px; left:139px; color:#000000;" id="ssmsgdiv"><h3 id="ssmsg">☺ Start new game by left clicking<br>on red dot.</h3></div>
 	<!-- Main box begin -->
 	<!-- Black big box -->
 	<div style="position:absolute; top:200px; left:450px; width:500px; height:400px; background-color:#000000;"></div>
 	<!-- Red dot -->
-	<div style="position:absolute; top:400px; left:700px; width:10px; height:10px; background-color:#ff0000; border-radius:5px;" onClick="Game();changeStatus();" id="RedDot"></div>
+	<div style="position:absolute; top:400px; left:700px; width:20px; height:20px; background-color:#ff0000; border-radius:10px; z-index:1;" onClick="Game();changeStatus();" id="RedDot"></div>
 	<!-- Obstacles begin -->
-	<!-- white dot -->
-	<div style="position:absolute; top:300px; left:900px; width:10px; height:10px; background-color:#ffffff; border-radius:5px;" id="whiteDot"></div>
+	<!-- white dots -->
+	<div style="position:absolute; top:300px; left:900px; width:10px; height:10px; background-color:#ffffff; border-radius:5px;" id="whiteDot1"></div>
+	<div style="position:absolute; top:300px; left:900px; width:10px; height:10px; background-color:#ffffff; border-radius:5px;" id="whiteDot2"></div>
+	<div style="position:absolute; top:300px; left:900px; width:10px; height:10px; background-color:#ffffff; border-radius:5px;" id="whiteDot3"></div>
 	<!-- white circle -->
-	<!--<div style="position:absolute; top:300px; left:900px; width:10px; height:10px; background-color:#ffffff; border-radius:5px;" id="whiteCircle"></div>
-	-->
+	<div style="position:absolute; top:500px; left:700px; width:50px; height:50px; background-color:#ffffff; border-radius:25px;" id="whiteCircle"></div>
+	<!-- white square -->
+	<div style="position:absolute; top:250px; left:600px; width:30px; height:30px; background-color:#ffffff;" id="whiteSquare"></div>
+	<!-- white rect -->
+	<div style="position:absolute; top:450px; left:550px; width:150px; height:20px; background-color:#ffffff;" id="whiteRect"></div>
+	<!-- white square1 -->
+	<div style="position:absolute; top:200px; left:450px; width:25px; height:25px; background-color:#ffffff;" id="whiteSquare1"></div>
+	<!-- white square2 -->
+	<div style="position:absolute; top:575px; left:450px; width:25px; height:25px; background-color:#ffffff;" id="whiteSquare2"></div>
+	<!-- white square3 -->
+	<div style="position:absolute; top:575px; left:925px; width:25px; height:25px; background-color:#ffffff;" id="whiteSquare3"></div>
+	<!-- white square4 -->
+	<div style="position:absolute; top:200px; left:925px; width:25px; height:25px; background-color:#ffffff;" id="whiteSquare4"></div>
+	<!-- white square5 -->
+	<div style="position:absolute; top:200px; left:450px; width:25px; height:25px; background-color:#ffffff;" id="whiteSquare5"></div>
+	<!-- white square6 -->
+	<div style="position:absolute; top:575px; left:450px; width:25px; height:25px; background-color:#ffffff;" id="whiteSquare6"></div>
+	<!-- white square7 -->
+	<div style="position:absolute; top:575px; left:925px; width:25px; height:25px; background-color:#ffffff;" id="whiteSquare7"></div>
+	<!-- white square8 -->
+	<div style="position:absolute; top:200px; left:925px; width:25px; height:25px; background-color:#ffffff;" id="whiteSquare8"></div>
 	<!-- Obstacles end -->
 	<!-- Main box end -->
 	
