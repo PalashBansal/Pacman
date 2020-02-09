@@ -60,17 +60,20 @@ onmousemove = function(e)
 	}
 }
 
+var fps_value;
+
 function fpsStart()
 {	
 	if(1==play)
 	{
 		//setTimeout( fpsStart,1000/60 );
-		document.getElementById("fps").innerHTML = "FPS:" + fps.getFPS();
+		fps_value=fps.getFPS();
+		document.getElementById("fps").innerHTML = "FPS:" + fps_value;
 		document.getElementById("fpsdiv").setAttribute("style", "position:absolute; top:160px; left:450px;");
 	}
 }
 
-// these 2 functions are game loops(deciding factor for game speed based on browser performance)
+// these 2 functions are game loops(deciding factor for game speed(FPS) based on browser performance)
 //MoveWhiteFixedTrajectory
 //MoveWhiteRandomTrajectory
 var fps =
@@ -349,7 +352,7 @@ function CollisionDetected()
 	document.getElementById("ssmsg").innerHTML = "\u263a Left click in game window to reload game.";
 	document.getElementById("currS").setAttribute("style", "text-align:justify;text-align:center;color:#ffffff;font-size:20px");
 	document.getElementById("bestS").setAttribute("style", "text-align:justify;text-align:center;color:#ffffff;font-size:20px");
-	document.getElementById("ssmsgdiv").setAttribute("style", "position:absolute; max-width:300px; top:410px; left:139px;");
+	document.getElementById("ssmsgdiv").setAttribute("style", "position:absolute; max-width:300px; top:420px; left:139px;");
 	document.getElementById("fps").innerHTML = "FPS:0";
 	document.getElementById("fpsdiv").setAttribute("style", "position:absolute; top:160px; left:450px;");
 	callBlink();
@@ -381,14 +384,19 @@ function getRandomNumber(range1, range2)
 	return x;
 }
 
+var fps_threshold=120;//to determine whether to increment score or not.
+
 function ScoreTimer()
 {
 	if(1==play)
 	{
 		var delay=100;
 		setTimeout(function(){
-			currentScore+=1;
-			document.getElementById("currS").innerHTML=currentScore;
+			if(fps_value>=fps_threshold)
+			{
+				currentScore+=1;
+				document.getElementById("currS").innerHTML=currentScore;
+			}
 			ScoreTimer();
 		}, delay);
 	}
