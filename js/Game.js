@@ -27,13 +27,10 @@ function Game(e) /*Game entry point*/
 		CollisionDetection();
 		ScoreTimer();
 		BestScoreChecker();
+		//fpsStart();
 	}
-	else
-	{
-		play=2;
-		/*if(1==changeCookie)
-			createCookie();//Cookie*/
-	}
+	/*if(1==changeCookie)
+		createCookie();//Cookie*/
 }
 
 onmousedown = function(e)
@@ -62,6 +59,37 @@ onmousemove = function(e)
 		document.getElementById('RedBall').setAttribute("style","position:absolute; top:" + redY + "px; left:" + redX + "px; width:" + redWidth + "px; height:" + redHeight + "px; background-color:#ff0000; border-radius:" + redWidth/2 + "px; z-index:0;");
 	}
 }
+
+function fpsStart()
+{	
+	if(1==play)
+	{
+		//setTimeout( fpsStart,1000/60 );
+		document.getElementById("fps").innerHTML = "FPS:" + fps.getFPS();
+		document.getElementById("fpsdiv").setAttribute("style", "position:absolute; top:160px; left:450px;");
+	}
+}
+
+// these 2 functions are game loops(deciding factor for game speed based on browser performance)
+//MoveWhiteFixedTrajectory
+//MoveWhiteRandomTrajectory
+var fps =
+{
+	startTime : 0,	frameNumber : 0,
+	getFPS : function()
+	{
+		this.frameNumber++;
+		var d = new Date().getTime();
+		currentTime = ( d - this.startTime ) / 1000;
+		result = Math.floor( ( this.frameNumber / (currentTime*16) ) );//divide by number of obstacles(all objects invoking fps incrementor are parallely increasing frameNumber)
+		if( currentTime > 1 )
+		{
+			this.startTime = new Date().getTime();
+			this.frameNumber = 0;
+		}
+		return result;
+	}
+};
 
 //redX=left=705 redY=top=405
 //white dot1 = wd1_
@@ -145,6 +173,7 @@ function MoveWhiteFixedTrajectory(top_source, left_source, id, stylestr, delay, 
 	if(1==play)
 	{
 		setTimeout(function(){
+			fpsStart();
 			if(top_source<top_dest)
 				top_source++;
 			else if(top_source>top_dest)
@@ -177,6 +206,7 @@ function MoveWhiteRandomTrajectory(top_source, left_source, delayRange1, delayRa
 	if(1==play)
 	{
 		setTimeout(function(){
+			fpsStart();
 			if(top_source<top_dest)
 				top_source++;
 			else if(top_source>top_dest)
@@ -320,6 +350,8 @@ function CollisionDetected()
 	document.getElementById("currS").setAttribute("style", "text-align:justify;text-align:center;color:#ffffff;font-size:20px");
 	document.getElementById("bestS").setAttribute("style", "text-align:justify;text-align:center;color:#ffffff;font-size:20px");
 	document.getElementById("ssmsgdiv").setAttribute("style", "position:absolute; max-width:300px; top:410px; left:139px;");
+	document.getElementById("fps").innerHTML = "FPS:0";
+	document.getElementById("fpsdiv").setAttribute("style", "position:absolute; top:160px; left:450px;");
 	callBlink();
 }
 
