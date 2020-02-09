@@ -1,21 +1,9 @@
-function changeStatus()
-{
-	if(1==play)
-	{
-		document.getElementById("ssmsg").innerHTML = "\u263a Stop game by left clicking again<br>on red ball.";
-	}
-	else
-	{
-		document.getElementById("ssmsg").innerHTML = "\u263a Reload page to start new game.";
-		document.getElementById("ssmsgdiv").setAttribute("style", "position:absolute; top:410px; left:139px; color:#009700;");
-	}
-}
-
 var play=0; // Start and Stop game trigger
-var redX=705; // Left of red dot
-var redY=405; // Top of red dot
-var redWidth=20;
-var redHeight=20; // Always keep width and height same
+var redX=705; // Left of red ball
+var redY=405; // Top of red ball
+var redRadius=20;
+var redWidth=redRadius;
+var redHeight=redRadius; // Always keep width and height same
 var currentScore=0;
 var bestScore=0; // in Cookie
 
@@ -48,6 +36,15 @@ function Game(e) /*Game entry point*/
 	}
 }
 
+onmousedown = function(e)
+{
+	if(2==play && (window.event.which==1)/*detects left click*/ && e.clientX>=450 && e.clientX<=950 && e.clientY>=200 && e.clientY<=600)
+	{
+		var fromServer=true;//false means page reload from cache
+		location.reload(fromServer);
+	}
+}
+
 onmousemove = function(e)
 {
 	if(1==play)
@@ -62,7 +59,7 @@ onmousemove = function(e)
 			redY=200;
 		else if(e.clientY>(600-(redHeight/2)))
 			redY=600-redHeight/2;
-		document.getElementById('RedDot').setAttribute("style","position:absolute; top:" + redY + "px; left:" + redX + "px; width:" + redWidth + "px; height:" + redHeight + "px; background-color:#ff0000; border-radius:" + redWidth/2 + "px; z-index:1;");
+		document.getElementById('RedBall').setAttribute("style","position:absolute; top:" + redY + "px; left:" + redX + "px; width:" + redWidth + "px; height:" + redHeight + "px; background-color:#ff0000; border-radius:" + redWidth/2 + "px; z-index:0;");
 	}
 }
 
@@ -319,10 +316,10 @@ function CircleCircleCollisionCondtion(x1, y1, x2, y2, dia)
 function CollisionDetected()
 {
 	play=2;
-	document.getElementById("ssmsg").innerHTML = "\u263a Reload page to start new game.";
-	document.getElementById("currS").setAttribute("style", "text-align:justify;text-align:center; color:#009700; font-size:20px");
-	document.getElementById("bestS").setAttribute("style", "text-align:justify;text-align:center; color:#009700; font-size:20px");
-	document.getElementById("ssmsgdiv").setAttribute("style", "position:absolute; top:410px; left:139px; color:#009700;");
+	document.getElementById("ssmsg").innerHTML = "\u263a Left click in game window to reload game.";
+	document.getElementById("currS").setAttribute("style", "text-align:justify;text-align:center;color:#ffffff;font-size:20px");
+	document.getElementById("bestS").setAttribute("style", "text-align:justify;text-align:center;color:#ffffff;font-size:20px");
+	document.getElementById("ssmsgdiv").setAttribute("style", "position:absolute; max-width:300px; top:410px; left:139px;");
 	callBlink();
 }
 
@@ -333,12 +330,12 @@ function callBlink()
 		if(show)
 		{
 			show=0;
-			document.getElementById("cd").setAttribute("style", "position:absolute; top:375px; left:575px; color:#009700; z-index:0;");
+			document.getElementById("cd").setAttribute("style", "position:absolute; top:375px; left:625px; color:#009700; z-index:0;");
 		}
 		else
 		{
 			show=1;
-			document.getElementById("cd").setAttribute("style", "position:absolute; top:375px; left:575px; color:#009700; z-index:1;");
+			document.getElementById("cd").setAttribute("style", "position:absolute; top:375px; left:625px; color:#009700; z-index:1;");
 		}
 		callBlink();
 		}, 1000);
