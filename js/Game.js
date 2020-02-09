@@ -1,4 +1,5 @@
 var play=0; // Start and Stop game trigger
+//Pacman(red dot previously in game)
 var redX=705; // Left of red ball
 var redY=405; // Top of red ball
 var redRadius=20;
@@ -56,7 +57,7 @@ onmousemove = function(e)
 			redY=200;
 		else if(e.clientY>(600-(redHeight/2)))
 			redY=600-redHeight;
-		document.getElementById('RedBall').setAttribute("style","position:absolute; top:" + redY + "px; left:" + redX + "px; width:" + redWidth + "px; height:" + redHeight + "px; background-color:#ff0000; border-radius:" + redWidth/2 + "px; z-index:0; cursor:none");
+		document.getElementById('Pacman').setAttribute("style","position:absolute; top:" + redY + "px; left:" + redX + "px; width:" + redWidth + "px; height:" + redHeight + "px; background-color:#ff0000; border-radius:" + redWidth/2 + "px; z-index:0; cursor:none");
 	}
 }
 
