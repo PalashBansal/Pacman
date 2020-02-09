@@ -8,6 +8,29 @@ var redHeight=redRadius; // Always keep width and height same
 var currentScore=0;
 var bestScore=0; // in Cookie
 
+function addObstacleImages()
+{
+	document.getElementById('wcimg').setAttribute("src","meta/opponent" + getRandomNumber(1,4) + ".png");
+	document.getElementById('wd1img').setAttribute("src","meta/opponent" + getRandomNumber(1,4) + ".png");
+	document.getElementById('wd2img').setAttribute("src","meta/opponent" + getRandomNumber(1,4) + ".png");
+	document.getElementById('wd3img').setAttribute("src","meta/opponent" + getRandomNumber(1,4) + ".png");
+	document.getElementById('wsimg').setAttribute("src","meta/opponent" + getRandomNumber(1,4) + ".png");
+	document.getElementById('wr1img').setAttribute("src","meta/opponent" + getRandomNumber(1,4) + ".png");
+	document.getElementById('wr2img').setAttribute("src","meta/opponent" + getRandomNumber(1,4) + ".png");
+	document.getElementById('wr3img').setAttribute("src","meta/opponent" + getRandomNumber(1,4) + ".png");
+	document.getElementById('wr4img').setAttribute("src","meta/opponent" + getRandomNumber(1,4) + ".png");
+	document.getElementById('wr5img').setAttribute("src","meta/opponent" + getRandomNumber(1,4) + ".png");
+	document.getElementById('wr6img').setAttribute("src","meta/opponent" + getRandomNumber(1,4) + ".png");
+	document.getElementById('ws1img').setAttribute("src","meta/opponent" + getRandomNumber(1,4) + ".png");
+	document.getElementById('ws2img').setAttribute("src","meta/opponent" + getRandomNumber(1,4) + ".png");
+	document.getElementById('ws3img').setAttribute("src","meta/opponent" + getRandomNumber(1,4) + ".png");
+	document.getElementById('ws4img').setAttribute("src","meta/opponent" + getRandomNumber(1,4) + ".png");
+	document.getElementById('ws5img').setAttribute("src","meta/opponent" + getRandomNumber(1,4) + ".png");
+	document.getElementById('ws6img').setAttribute("src","meta/opponent" + getRandomNumber(1,4) + ".png");
+	document.getElementById('ws7img').setAttribute("src","meta/opponent" + getRandomNumber(1,4) + ".png");
+	document.getElementById('ws8img').setAttribute("src","meta/opponent" + getRandomNumber(1,4) + ".png");
+}
+
 function Game(e) /*Game entry point*/
 {
 	if(0==play)
@@ -107,7 +130,7 @@ var wc_top_sourceMain=500, wc_left_sourceMain=700, wc_delayRange1=5, wc_delayRan
 //white square = ws_
 var ws_top_sourceMain=250, ws_left_sourceMain=600, ws_delayRange1=10, ws_delayRange2=20, ws_top_destRange1=200, ws_top_destRange2=570, ws_left_destRange1=450, ws_left_destRange2=920, ws_id="whiteSquare", ws_stylestr="width:30px; height:30px;";
 //white rect = wr_
-var wr_top_sourceMain=450, wr_left_sourceMain=550, wr_delayRange1=5, wr_delayRange2=10, wr_top_destRange1=200, wr_top_destRange2=580, wr_left_destRange1=450, wr_left_destRange2=800, wr_id="whiteRect", wr_stylestr="width:150px; height:20px;";
+var wr_top_sourceMain=450, wr_left_sourceMain=550, wr_delayRange1=5, wr_delayRange2=10, wr_top_destRange1=200, wr_top_destRange2=580, wr_left_destRange1=450, wr_left_destRange2=800, wr_id="whiteRect", wr_stylestr="width:140px; height:20px;";
 //white square1 = ws1_
 var ws1_top_sourceMain=200, ws1_left_sourceMain=450, ws1_delayRange=1, ws1_id="whiteSquare1", ws1_stylestr="width:25px; height:25px;";// top_dest=575, left_dest=925
 //white square2 = ws2_
@@ -187,7 +210,7 @@ function MoveWhiteFixedTrajectory(top_source, left_source, id, stylestr, delay, 
 			else if(left_source>left_dest)
 				left_source--;
 			updateValuesForCollisionDetection(id, top_source, left_source);
-			document.getElementById(id).setAttribute("style","position:absolute; top:" + top_source + "px; left:" + left_source + "px; " + stylestr + "background-color:#ffffff;");
+			document.getElementById(id).setAttribute("style","position:absolute; top:" + top_source + "px; left:" + left_source + "px; " + stylestr);
 			if(!(top_source==top_dest && left_source==left_dest))
 				MoveWhiteFixedTrajectory(top_source, left_source, id, stylestr, delay, top_dest, left_dest, direction);
 			else
@@ -220,7 +243,7 @@ function MoveWhiteRandomTrajectory(top_source, left_source, delayRange1, delayRa
 			else if(left_source>left_dest)
 				left_source--;
 			updateValuesForCollisionDetection(id, top_source, left_source);
-			document.getElementById(id).setAttribute("style","position:absolute; top:" + top_source + "px; left:" + left_source + "px; " + stylestr + "background-color:#ffffff;");
+			document.getElementById(id).setAttribute("style","position:absolute; top:" + top_source + "px; left:" + left_source + "px; " + stylestr);
 			if(!(top_source==top_dest && left_source==left_dest))
 				MoveWhiteRandomTrajectory(top_source, left_source, delayRange1, delayRange2, top_destRange1, top_destRange2, left_destRange1, left_destRange2, id, stylestr, delay, top_dest, left_dest);
 			else
@@ -301,7 +324,7 @@ function DetectCollision(id)
 			else if(id=="whiteSquare")
 				x2=ws_left_sourceMain+15, y2=ws_top_sourceMain+15, rect_width=30, rect_height=30, typeOfCollision=1;
 			else if(id=="whiteRect")
-				x2=wr_left_sourceMain+75, y2=wr_top_sourceMain+10, rect_width=150, rect_height=20, typeOfCollision=1;
+				x2=wr_left_sourceMain+75, y2=wr_top_sourceMain+10, rect_width=140, rect_height=20, typeOfCollision=1;
 			else if(id=="whiteSquare1")
 				x2=ws1_left_sourceMain+12, y2=ws1_top_sourceMain+12, rect_width=25, rect_height=25, typeOfCollision=1;
 			else if(id=="whiteSquare2")
