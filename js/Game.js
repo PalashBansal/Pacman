@@ -51,11 +51,11 @@ onmousemove = function(e)
 		if(e.clientX<(450+(redWidth/2)))
 			redX=450;
 		else if(e.clientX>(950-(redWidth/2)))
-			redX=950-redWidth/2;
+			redX=950-redWidth;
 		if(e.clientY<(200+(redHeight/2)))
 			redY=200;
 		else if(e.clientY>(600-(redHeight/2)))
-			redY=600-redHeight/2;
+			redY=600-redHeight;
 		document.getElementById('RedBall').setAttribute("style","position:absolute; top:" + redY + "px; left:" + redX + "px; width:" + redWidth + "px; height:" + redHeight + "px; background-color:#ff0000; border-radius:" + redWidth/2 + "px; z-index:0;");
 	}
 }
