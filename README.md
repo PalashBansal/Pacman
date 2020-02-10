@@ -1,5 +1,5 @@
 # Collision
-Simple game based on collision detection.
+Game based on collision detection.
 
 Play game at- http://palashbansal.github.io/Collision
 
