@@ -7,6 +7,9 @@ assignees: ''
 
 ---
 
+<!-- This is a generic template and may not be applicable in all cases. -->
+<!-- Try to follow it where possible. -->
+
 **Is your feature request related to a problem? Please describe.**
 <!-- A clear and concise description of what the problem is. Ex. I'm always frustrated when [...] -->
 
