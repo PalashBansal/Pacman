@@ -19,7 +19,7 @@ Raise issues(bugs or new feature requests) from Issues section.
 
 Create a PR solving any issues (Follow 1 PR <-> 1 Issue rule)
 
-Any contributions are highly appreciated ☻
+Any contributions are highly appreciated ☺
 
 
 SUPPORT:
