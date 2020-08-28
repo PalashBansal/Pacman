@@ -8,6 +8,9 @@ var redHeight=redRadius; // Always keep width and height same
 var currentScore=0;
 var bestScore=0; // in Cookie
 
+const gameOverShowTime = 3000;
+const gameOverHideTime = 1500;
+
 function addObstacleImages()
 {
 	document.getElementById('wcimg').setAttribute("src","meta/opponent" + getRandomNumber(1,4) + ".png");
@@ -382,22 +385,28 @@ function CollisionDetected()
 	callBlink();
 }
 
-var show=1;
+// Blinks the game over display text
 function callBlink()
 {	
+	showGameOver(); // instantly show the game over message
 	setTimeout(function(){
-		if(show)
-		{
-			show=0;
-			document.getElementById("cd").setAttribute("style", "position:absolute; top:375px; left:625px; color:#009700; z-index:0;");
-		}
-		else
-		{
-			show=1;
-			document.getElementById("cd").setAttribute("style", "position:absolute; top:375px; left:625px; color:#009700; z-index:1;");
-		}
-		callBlink();
-		}, 1000);
+		hideGameOver();
+		setTimeout(function(){
+			callBlink();
+		}, gameOverHideTime); // hide the game over text for this long
+	}, gameOverShowTime); // show the game over text for this long
+}
+
+// Show the game over display text
+function showGameOver()
+{
+	document.getElementById("cd").setAttribute("style", "position:absolute; top:375px; left:625px; color:#009700; z-index:1;");
+}
+
+// Hide the game over display text
+function hideGameOver()
+{
+	document.getElementById("cd").setAttribute("style", "position:absolute; top:375px; left:625px; color:#009700; z-index:0;");
 }
 
 function getRandomNumber(range1, range2)
