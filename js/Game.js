@@ -400,13 +400,14 @@ function callBlink()
 // Show the game over display text
 function showGameOver()
 {
-	document.getElementById("cd").setAttribute("style", "position:absolute; top:375px; left:625px; color:#009700; z-index:1;");
+	document.getElementById("game-objects").style.opacity = "30%"; // dim the game objects so that the game over text is readable
+	document.getElementById("cd").style.display = "block";
 }
 
 // Hide the game over display text
 function hideGameOver()
 {
-	document.getElementById("cd").setAttribute("style", "position:absolute; top:375px; left:625px; color:#009700; z-index:0;");
+	document.getElementById("cd").style.display = "none";
 }
 
 function getRandomNumber(range1, range2)
