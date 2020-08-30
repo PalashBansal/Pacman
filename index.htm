@@ -18,7 +18,7 @@
 	<p style="text-align:justify;text-align:center; color:#ffffff"><strong>Best<br>Score</strong></p>
 	<p style="text-align:justify;text-align:center; color:#ffffff; font-size:20px" id="bestS"><strong>0</strong></p>
 	</div>
-	<div style="position:absolute; top:375px; left:625px; color:#009700; z-index:0;" id="cd"><h2>Game Over!</h2></div>
+	<div style="position:absolute; top:356px; left:610px; color:#39ff14; font-size: 24px; display: none; z-index: 1;" id="cd"><h2>Game Over!</h2></div>
 	<div style="position:absolute; top:160px; left:450px;" id="fpsdiv"><h3 id="fps"><p>FPS:0</p></h3></div>
 	<div style="position:absolute; top:300px; left:99px;"><h3><p><u>HOW TO PLAY:</u><br></p></h3></div>
 	<div style="position:absolute; max-width:300px; top:330px; left:139px;"><h3><p>☺ Use your mouse/touchpad to move pacman from hitting with moving ghosts.</p></h3></div>
@@ -27,67 +27,69 @@
 	<!-- Main box begin -->
 	<!-- Black big box -->
 	<div style="position:absolute; top:200px; left:450px; width:500px; height:400px; background-color:#000000;"></div>
-	<!-- Pacman -->
-	<div style="position:absolute; top:400px; left:700px; width:20px; height:20px; background-color:#ff0000; border-radius:10px; z-index:0;" onClick="Game();" id="Pacman"><img src="meta/pacman_final.gif" style="width:20px; height:20px;" id="pacmanImg" /></div>
-	<!-- Obstacles begin -->
-	<!-- white dots -->
-	<div style="position:absolute; top:300px; left:900px; width:10px; height:10px;  border-radius:5px;" id="whiteDot1">
-	<img src="meta/opponent1.png" style="width:10px; height:10px;" id="wd1img" />
-	</div>
-	<div style="position:absolute; top:300px; left:900px; width:10px; height:10px;  border-radius:5px;" id="whiteDot2">
-	<img src="meta/opponent2.png" style="width:10px; height:10px;" id="wd2img" />
-	</div>
-	<div style="position:absolute; top:300px; left:900px; width:10px; height:10px; border-radius:5px;" id="whiteDot3">
-	<img src="meta/opponent3.png" style="width:10px; height:10px;" id="wd3img" />
-	</div>
-	<!-- white circle -->
-	<div style="position:absolute; top:500px; left:700px; width:50px; height:50px; border-radius:25px;" id="whiteCircle">
-	<img src="meta/opponent4.png" style="width:50px; height:50px;" id="wcimg" />
-	</div>
-	<!-- white square -->
-	<div style="position:absolute; top:250px; left:600px; width:30px; height:30px;" id="whiteSquare">
-	<img src="meta/opponent3.png" style="width:30px; height:30px;" id="wsimg" />
-	</div>
-	<!-- white rect -->
-	<div style="position:absolute; top:450px; left:550px; width:140px; height:20px;" id="whiteRect">
-	<img src="meta/opponent1.png" style="width:20px; height:20px;" id="wr1img" />
-	<img src="meta/opponent2.png" style="width:20px; height:20px;" id="wr2img" />
-	<img src="meta/opponent3.png" style="width:20px; height:20px;" id="wr3img" />
-	<img src="meta/opponent4.png" style="width:20px; height:20px;" id="wr4img" />
-	<img src="meta/opponent1.png" style="width:20px; height:20px;" id="wr5img" />
-	<img src="meta/opponent2.png" style="width:20px; height:20px;" id="wr6img" />
-	</div>
-	<!-- white square1 -->
-	<div style="position:absolute; top:200px; left:450px; width:25px; height:25px; " id="whiteSquare1">
-	<img src="meta/opponent1.png" style="width:25px; height:25px;" id="ws1img" />
-	</div>
-	<!-- white square2 -->
-	<div style="position:absolute; top:575px; left:450px; width:25px; height:25px; " id="whiteSquare2">
-	<img src="meta/opponent4.png" style="width:25px; height:25px;" id="ws2img" />
-	</div>
-	<!-- white square3 -->
-	<div style="position:absolute; top:575px; left:925px; width:25px; height:25px; " id="whiteSquare3">
-	<img src="meta/opponent2.png" style="width:25px; height:25px;" id="ws3img" />
-	</div>
-	<!-- white square4 -->
-	<div style="position:absolute; top:200px; left:925px; width:25px; height:25px; " id="whiteSquare4">
-	<img src="meta/opponent3.png" style="width:25px; height:25px;" id="ws4img" />
-	</div>
-	<!-- white square5 -->
-	<div style="position:absolute; top:200px; left:450px; width:25px; height:25px; " id="whiteSquare5">
-	<img src="meta/opponent1.png" style="width:25px; height:25px;" id="ws5img" />
-	</div>
-	<!-- white square6 -->
-	<div style="position:absolute; top:575px; left:450px; width:25px; height:25px; " id="whiteSquare6">
-	<img src="meta/opponent4.png" style="width:25px; height:25px;" id="ws6img" />
-	</div>
-	<!-- white square7 -->
-	<div style="position:absolute; top:575px; left:925px; width:25px; height:25px; " id="whiteSquare7">
-	<img src="meta/opponent2.png" style="width:25px; height:25px;" id="ws7img" />
-	</div>
-	<!-- white square8 -->
-	<div style="position:absolute; top:200px; left:925px; width:25px; height:25px; " id="whiteSquare8">
-	<img src="meta/opponent3.png" style="width:25px; height:25px;" id="ws8img" />
+	<div id="game-objects">
+		<!-- Pacman -->
+		<div style="position:absolute; top:400px; left:700px; width:20px; height:20px; background-color:#ff0000; border-radius:10px; z-index:0;" onClick="Game();" id="Pacman"><img src="meta/pacman_final.gif" style="width:20px; height:20px;" id="pacmanImg" /></div>
+		<!-- Obstacles begin -->
+		<!-- white dots -->
+		<div style="position:absolute; top:300px; left:900px; width:10px; height:10px;  border-radius:5px;" id="whiteDot1">
+		<img src="meta/opponent1.png" style="width:10px; height:10px;" id="wd1img" />
+		</div>
+		<div style="position:absolute; top:300px; left:900px; width:10px; height:10px;  border-radius:5px;" id="whiteDot2">
+		<img src="meta/opponent2.png" style="width:10px; height:10px;" id="wd2img" />
+		</div>
+		<div style="position:absolute; top:300px; left:900px; width:10px; height:10px; border-radius:5px;" id="whiteDot3">
+		<img src="meta/opponent3.png" style="width:10px; height:10px;" id="wd3img" />
+		</div>
+		<!-- white circle -->
+		<div style="position:absolute; top:500px; left:700px; width:50px; height:50px; border-radius:25px;" id="whiteCircle">
+		<img src="meta/opponent4.png" style="width:50px; height:50px;" id="wcimg" />
+		</div>
+		<!-- white square -->
+		<div style="position:absolute; top:250px; left:600px; width:30px; height:30px;" id="whiteSquare">
+		<img src="meta/opponent3.png" style="width:30px; height:30px;" id="wsimg" />
+		</div>
+		<!-- white rect -->
+		<div style="position:absolute; top:450px; left:550px; width:140px; height:20px;" id="whiteRect">
+		<img src="meta/opponent1.png" style="width:20px; height:20px;" id="wr1img" />
+		<img src="meta/opponent2.png" style="width:20px; height:20px;" id="wr2img" />
+		<img src="meta/opponent3.png" style="width:20px; height:20px;" id="wr3img" />
+		<img src="meta/opponent4.png" style="width:20px; height:20px;" id="wr4img" />
+		<img src="meta/opponent1.png" style="width:20px; height:20px;" id="wr5img" />
+		<img src="meta/opponent2.png" style="width:20px; height:20px;" id="wr6img" />
+		</div>
+		<!-- white square1 -->
+		<div style="position:absolute; top:200px; left:450px; width:25px; height:25px; " id="whiteSquare1">
+		<img src="meta/opponent1.png" style="width:25px; height:25px;" id="ws1img" />
+		</div>
+		<!-- white square2 -->
+		<div style="position:absolute; top:575px; left:450px; width:25px; height:25px; " id="whiteSquare2">
+		<img src="meta/opponent4.png" style="width:25px; height:25px;" id="ws2img" />
+		</div>
+		<!-- white square3 -->
+		<div style="position:absolute; top:575px; left:925px; width:25px; height:25px; " id="whiteSquare3">
+		<img src="meta/opponent2.png" style="width:25px; height:25px;" id="ws3img" />
+		</div>
+		<!-- white square4 -->
+		<div style="position:absolute; top:200px; left:925px; width:25px; height:25px; " id="whiteSquare4">
+		<img src="meta/opponent3.png" style="width:25px; height:25px;" id="ws4img" />
+		</div>
+		<!-- white square5 -->
+		<div style="position:absolute; top:200px; left:450px; width:25px; height:25px; " id="whiteSquare5">
+		<img src="meta/opponent1.png" style="width:25px; height:25px;" id="ws5img" />
+		</div>
+		<!-- white square6 -->
+		<div style="position:absolute; top:575px; left:450px; width:25px; height:25px; " id="whiteSquare6">
+		<img src="meta/opponent4.png" style="width:25px; height:25px;" id="ws6img" />
+		</div>
+		<!-- white square7 -->
+		<div style="position:absolute; top:575px; left:925px; width:25px; height:25px; " id="whiteSquare7">
+		<img src="meta/opponent2.png" style="width:25px; height:25px;" id="ws7img" />
+		</div>
+		<!-- white square8 -->
+		<div style="position:absolute; top:200px; left:925px; width:25px; height:25px; " id="whiteSquare8">
+		<img src="meta/opponent3.png" style="width:25px; height:25px;" id="ws8img" />
+		</div>
 	</div>
 	<!-- Obstacles end -->
 	<!-- Main box end -->
