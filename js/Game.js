@@ -477,3 +477,20 @@ function createCookie()
     document.cookie = cname + "=" + cvalue + "; " + expires;
 }*/
 //todo Cookies,favicon,share,donate
+
+
+function myFunction() {
+	var range = document.createRange();
+	range.selectNode(document.getElementById("btc"));
+	window.getSelection().removeAllRanges(); 
+	window.getSelection().addRange(range); 
+	document.execCommand("copy");
+	window.getSelection().removeAllRanges();
+	var tooltip = document.getElementById("myTooltip");
+	tooltip.innerHTML = "Copied to clipboard!";
+  }
+  
+  function outFunc() {
+	var tooltip = document.getElementById("myTooltip");
+	tooltip.innerHTML = "Copy to clipboard";
+  }
