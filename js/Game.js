@@ -487,10 +487,10 @@ function myFunction() {
 	document.execCommand("copy");
 	window.getSelection().removeAllRanges();
 	var tooltip = document.getElementById("myTooltip");
-	tooltip.innerHTML = "Copied to clipboard!";
+	tooltip.innerHTML = "Copied: " + range;
   }
   
   function outFunc() {
 	var tooltip = document.getElementById("myTooltip");
-	tooltip.innerHTML = "Copy to clipboard";
+	tooltip.innerHTML = "Copy to clipboard!";
   }
