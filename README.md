@@ -24,7 +24,7 @@ Any contributions are highly appreciated ☺
 
 SUPPORT:
 
-If you liked the app and would like to grab me a coffee-
+If you liked the game and would like to grab me a coffee-
 
 Bitcoin(BTC) - 331RPAL7LsAjL2BzUKDgHsixQWepMbfchX
 

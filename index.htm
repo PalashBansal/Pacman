@@ -2,9 +2,50 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Collision</title>
   <link rel="shortcut icon" href="meta/favicon.ico">
    <script type="text/javascript" src="js/Game.js"></script>
+	<style>
+	.tooltip {
+	  position: relative;
+	  display: inline-block;
+	}
+
+	.tooltip .tooltiptext {
+	  visibility: hidden;
+	  width: 140px;
+	  background-color: #555;
+	  color: #fff;
+	  text-align: center;
+	  border-radius: 6px;
+	  padding: 5px;
+	  position: absolute;
+	  z-index: 1;
+	  bottom: 150%;
+	  left: 50%;
+	  margin-left: -75px;
+	  opacity: 0;
+	  transition: opacity 0.3s;
+	  overflow-wrap: break-word;
+	}
+
+	.tooltip .tooltiptext::after {
+	  content: "";
+	  position: absolute;
+	  top: 100%;
+	  left: 50%;
+	  margin-left: -5px;
+	  border-width: 5px;
+	  border-style: solid;
+	  border-color: #555 transparent transparent transparent;
+	}
+
+	.tooltip:hover .tooltiptext {
+	  visibility: visible;
+	  opacity: 1;
+	}
+	</style>
 </head>
 <body style="background:#999999"  onLoad="addObstacleImages();">
 	<!-- <script> alert(document.documentElement.clientWidth + ", " + document.documentElement.clientHeight) </script> -->
@@ -18,7 +59,7 @@
 	<p style="text-align:justify;text-align:center; color:#ffffff"><strong>Best<br>Score</strong></p>
 	<p style="text-align:justify;text-align:center; color:#ffffff; font-size:20px" id="bestS"><strong>0</strong></p>
 	</div>
-	<div style="position:absolute; top:375px; left:625px; color:#009700; z-index:0;" id="cd"><h2>Game Over!</h2></div>
+	<div style="position:absolute; top:356px; left:610px; color:#39ff14; font-size: 24px; display: none; z-index: 1;" id="cd"><h2>Game Over!</h2></div>
 	<div style="position:absolute; top:160px; left:450px;" id="fpsdiv"><h3 id="fps"><p>FPS:0</p></h3></div>
 	<div style="position:absolute; top:300px; left:99px;"><h3><p><u>HOW TO PLAY:</u><br></p></h3></div>
 	<div style="position:absolute; max-width:300px; top:330px; left:139px;"><h3><p>☺ Use your mouse/touchpad to move pacman from hitting with moving ghosts.</p></h3></div>
@@ -27,67 +68,69 @@
 	<!-- Main box begin -->
 	<!-- Black big box -->
 	<div style="position:absolute; top:200px; left:450px; width:500px; height:400px; background-color:#000000;"></div>
-	<!-- Pacman -->
-	<div style="position:absolute; top:400px; left:700px; width:20px; height:20px; background-color:#ff0000; border-radius:10px; z-index:0;" onClick="Game();" id="Pacman"><img src="meta/pacman_final.gif" style="width:20px; height:20px;" id="pacmanImg" /></div>
-	<!-- Obstacles begin -->
-	<!-- white dots -->
-	<div style="position:absolute; top:300px; left:900px; width:10px; height:10px;  border-radius:5px;" id="whiteDot1">
-	<img src="meta/opponent1.png" style="width:10px; height:10px;" id="wd1img" />
-	</div>
-	<div style="position:absolute; top:300px; left:900px; width:10px; height:10px;  border-radius:5px;" id="whiteDot2">
-	<img src="meta/opponent2.png" style="width:10px; height:10px;" id="wd2img" />
-	</div>
-	<div style="position:absolute; top:300px; left:900px; width:10px; height:10px; border-radius:5px;" id="whiteDot3">
-	<img src="meta/opponent3.png" style="width:10px; height:10px;" id="wd3img" />
-	</div>
-	<!-- white circle -->
-	<div style="position:absolute; top:500px; left:700px; width:50px; height:50px; border-radius:25px;" id="whiteCircle">
-	<img src="meta/opponent4.png" style="width:50px; height:50px;" id="wcimg" />
-	</div>
-	<!-- white square -->
-	<div style="position:absolute; top:250px; left:600px; width:30px; height:30px;" id="whiteSquare">
-	<img src="meta/opponent3.png" style="width:30px; height:30px;" id="wsimg" />
-	</div>
-	<!-- white rect -->
-	<div style="position:absolute; top:450px; left:550px; width:140px; height:20px;" id="whiteRect">
-	<img src="meta/opponent1.png" style="width:20px; height:20px;" id="wr1img" />
-	<img src="meta/opponent2.png" style="width:20px; height:20px;" id="wr2img" />
-	<img src="meta/opponent3.png" style="width:20px; height:20px;" id="wr3img" />
-	<img src="meta/opponent4.png" style="width:20px; height:20px;" id="wr4img" />
-	<img src="meta/opponent1.png" style="width:20px; height:20px;" id="wr5img" />
-	<img src="meta/opponent2.png" style="width:20px; height:20px;" id="wr6img" />
-	</div>
-	<!-- white square1 -->
-	<div style="position:absolute; top:200px; left:450px; width:25px; height:25px; " id="whiteSquare1">
-	<img src="meta/opponent1.png" style="width:25px; height:25px;" id="ws1img" />
-	</div>
-	<!-- white square2 -->
-	<div style="position:absolute; top:575px; left:450px; width:25px; height:25px; " id="whiteSquare2">
-	<img src="meta/opponent4.png" style="width:25px; height:25px;" id="ws2img" />
-	</div>
-	<!-- white square3 -->
-	<div style="position:absolute; top:575px; left:925px; width:25px; height:25px; " id="whiteSquare3">
-	<img src="meta/opponent2.png" style="width:25px; height:25px;" id="ws3img" />
-	</div>
-	<!-- white square4 -->
-	<div style="position:absolute; top:200px; left:925px; width:25px; height:25px; " id="whiteSquare4">
-	<img src="meta/opponent3.png" style="width:25px; height:25px;" id="ws4img" />
-	</div>
-	<!-- white square5 -->
-	<div style="position:absolute; top:200px; left:450px; width:25px; height:25px; " id="whiteSquare5">
-	<img src="meta/opponent1.png" style="width:25px; height:25px;" id="ws5img" />
-	</div>
-	<!-- white square6 -->
-	<div style="position:absolute; top:575px; left:450px; width:25px; height:25px; " id="whiteSquare6">
-	<img src="meta/opponent4.png" style="width:25px; height:25px;" id="ws6img" />
-	</div>
-	<!-- white square7 -->
-	<div style="position:absolute; top:575px; left:925px; width:25px; height:25px; " id="whiteSquare7">
-	<img src="meta/opponent2.png" style="width:25px; height:25px;" id="ws7img" />
-	</div>
-	<!-- white square8 -->
-	<div style="position:absolute; top:200px; left:925px; width:25px; height:25px; " id="whiteSquare8">
-	<img src="meta/opponent3.png" style="width:25px; height:25px;" id="ws8img" />
+	<div id="game-objects">
+		<!-- Pacman -->
+		<div style="position:absolute; top:400px; left:700px; width:20px; height:20px; background-color:#ff0000; border-radius:10px; z-index:0;" onClick="Game();" id="Pacman"><img src="meta/pacman_final.gif" style="width:20px; height:20px;" id="pacmanImg" /></div>
+		<!-- Obstacles begin -->
+		<!-- white dots -->
+		<div style="position:absolute; top:300px; left:900px; width:10px; height:10px;  border-radius:5px;" id="whiteDot1">
+		<img src="meta/opponent1.png" style="width:10px; height:10px;" id="wd1img" />
+		</div>
+		<div style="position:absolute; top:300px; left:900px; width:10px; height:10px;  border-radius:5px;" id="whiteDot2">
+		<img src="meta/opponent2.png" style="width:10px; height:10px;" id="wd2img" />
+		</div>
+		<div style="position:absolute; top:300px; left:900px; width:10px; height:10px; border-radius:5px;" id="whiteDot3">
+		<img src="meta/opponent3.png" style="width:10px; height:10px;" id="wd3img" />
+		</div>
+		<!-- white circle -->
+		<div style="position:absolute; top:500px; left:700px; width:50px; height:50px; border-radius:25px;" id="whiteCircle">
+		<img src="meta/opponent4.png" style="width:50px; height:50px;" id="wcimg" />
+		</div>
+		<!-- white square -->
+		<div style="position:absolute; top:250px; left:600px; width:30px; height:30px;" id="whiteSquare">
+		<img src="meta/opponent3.png" style="width:30px; height:30px;" id="wsimg" />
+		</div>
+		<!-- white rect -->
+		<div style="position:absolute; top:450px; left:550px; width:140px; height:20px;" id="whiteRect">
+		<img src="meta/opponent1.png" style="width:20px; height:20px;" id="wr1img" />
+		<img src="meta/opponent2.png" style="width:20px; height:20px;" id="wr2img" />
+		<img src="meta/opponent3.png" style="width:20px; height:20px;" id="wr3img" />
+		<img src="meta/opponent4.png" style="width:20px; height:20px;" id="wr4img" />
+		<img src="meta/opponent1.png" style="width:20px; height:20px;" id="wr5img" />
+		<img src="meta/opponent2.png" style="width:20px; height:20px;" id="wr6img" />
+		</div>
+		<!-- white square1 -->
+		<div style="position:absolute; top:200px; left:450px; width:25px; height:25px; " id="whiteSquare1">
+		<img src="meta/opponent1.png" style="width:25px; height:25px;" id="ws1img" />
+		</div>
+		<!-- white square2 -->
+		<div style="position:absolute; top:575px; left:450px; width:25px; height:25px; " id="whiteSquare2">
+		<img src="meta/opponent4.png" style="width:25px; height:25px;" id="ws2img" />
+		</div>
+		<!-- white square3 -->
+		<div style="position:absolute; top:575px; left:925px; width:25px; height:25px; " id="whiteSquare3">
+		<img src="meta/opponent2.png" style="width:25px; height:25px;" id="ws3img" />
+		</div>
+		<!-- white square4 -->
+		<div style="position:absolute; top:200px; left:925px; width:25px; height:25px; " id="whiteSquare4">
+		<img src="meta/opponent3.png" style="width:25px; height:25px;" id="ws4img" />
+		</div>
+		<!-- white square5 -->
+		<div style="position:absolute; top:200px; left:450px; width:25px; height:25px; " id="whiteSquare5">
+		<img src="meta/opponent1.png" style="width:25px; height:25px;" id="ws5img" />
+		</div>
+		<!-- white square6 -->
+		<div style="position:absolute; top:575px; left:450px; width:25px; height:25px; " id="whiteSquare6">
+		<img src="meta/opponent4.png" style="width:25px; height:25px;" id="ws6img" />
+		</div>
+		<!-- white square7 -->
+		<div style="position:absolute; top:575px; left:925px; width:25px; height:25px; " id="whiteSquare7">
+		<img src="meta/opponent2.png" style="width:25px; height:25px;" id="ws7img" />
+		</div>
+		<!-- white square8 -->
+		<div style="position:absolute; top:200px; left:925px; width:25px; height:25px; " id="whiteSquare8">
+		<img src="meta/opponent3.png" style="width:25px; height:25px;" id="ws8img" />
+		</div>
 	</div>
 	<!-- Obstacles end -->
 	<!-- Main box end -->
@@ -97,5 +140,18 @@
 	<div style="position:absolute; top:620px; left:210px;"><h3><p>I created this game in my spare time after getting inspired from the famous <a target="_blank" href="https://space.mit.edu/~linares/game.htm">Escapa game</a></p></h3></div>
 	<div style="position:absolute; top:650px; left:210px;"><h3><p><a target="_blank" href="https://github.com/PalashBansal/Collision">Contributions</a> are welcome :)</p></h3></div>
 	
+	<div style="position:absolute; top:720px; left:210px;"><h3><p>If you liked the game and would like to grab me a coffee-</p></h3></div>
+	<div style="position:absolute; top:750px; left:210px;"><h3><p>Bitcoin(BTC) - </p></h3></div>
+	<div style="position:absolute; top:750px; left:335px;" ><h3><p id="btc">331RPAL7LsAjL2BzUKDgHsixQWepMbfchX</p></h3></div>
+	<div style="position:absolute; top:780px; left:210px;"><h3><p>Paypal - palash.bansal20@gmail.com</p></h3></div>
+	<div style="position:absolute; top:768px; left:715px;" class="tooltip">
+	<button onclick="myFunction()" onmouseout="outFunc()">
+	  <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
+	  Copy address
+	  </button>
+	</div>
+
+	
 </body>
+
 </html>
