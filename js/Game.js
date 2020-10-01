@@ -479,9 +479,14 @@ function createCookie()
 //todo Cookies,favicon,share,donate
 
 
-function myFunction() {
+function CopyBtnClick(flag) {
+	var flagString;
+	if(flag==1)
+		flagString="btc";
+	else
+		flagString="email";
 	var range = document.createRange();
-	range.selectNode(document.getElementById("btc"));
+	range.selectNode(document.getElementById(flagString));
 	window.getSelection().removeAllRanges(); 
 	window.getSelection().addRange(range); 
 	document.execCommand("copy");
@@ -490,7 +495,7 @@ function myFunction() {
 	tooltip.innerHTML = "Copied: " + range;
   }
   
-  function outFunc() {
+  function TooltipOutFunc() {
 	var tooltip = document.getElementById("myTooltip");
 	tooltip.innerHTML = "Copy to clipboard!";
   }
