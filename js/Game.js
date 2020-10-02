@@ -86,6 +86,7 @@ function Game(e) {
 			bestScore=parseInt(CookieScore, 10);//Cookie
 			alert(bestScore + "af2");
 		}*/
+    document.getElementById("bestS").innerHTML = bestScore;
     SendObstacles();
     CollisionDetection();
     ScoreTimer();
