@@ -6,7 +6,7 @@ var redRadius=20;
 var redWidth=redRadius;
 var redHeight=redRadius; // Always keep width and height same
 var currentScore=0;
-var bestScore = Number(sessionStorage.getItem("best-score")) || 0; // from session-storage
+var bestScore = Number(localStorage.getItem("best-score")) || 0; // from session-storage
 
 const gameOverShowTime = 3000;
 const gameOverHideTime = 1500;
@@ -32,7 +32,7 @@ function addObstacleImages()
 	document.getElementById('ws6img').setAttribute("src","meta/opponent" + getRandomNumber(1,4) + ".png");
 	document.getElementById('ws7img').setAttribute("src","meta/opponent" + getRandomNumber(1,4) + ".png");
 	document.getElementById('ws8img').setAttribute("src","meta/opponent" + getRandomNumber(1,4) + ".png");
-  document.getElementById("bestS").innerHTML = bestScore;
+  	document.getElementById("bestS").innerHTML = bestScore;
 }
 
 function Game(e) /*Game entry point*/
@@ -446,7 +446,7 @@ function BestScoreChecker()
 		if(currentScore>bestScore)
 		{
 			bestScore=currentScore;
-      		sessionStorage.setItem("best-score", currentScore);
+      		localStorage.setItem("best-score", currentScore);
 			document.getElementById("bestS").innerHTML=bestScore;
 			// changeCookie=1;
 		}
