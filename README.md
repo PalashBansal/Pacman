@@ -18,6 +18,7 @@ Test your changes against your browser and push changes followed by PR
 Raise issues(bugs or new feature requests) from Issues section.
 
 Create a PR solving any issues (Follow 1 PR <-> 1 Issue rule)
+Please keep a stand-alone PR for code refactoring free of new features/bug-fix.
 
 Any contributions are highly appreciated ☺
 
