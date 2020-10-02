@@ -18,7 +18,10 @@ Test your changes against your browser and push changes followed by PR
 Raise issues(bugs or new feature requests) from Issues section.
 
 Create a PR solving any issues (Follow 1 PR <-> 1 Issue rule)
+
 Please keep a stand-alone PR for code refactoring free of new features/bug-fix.
+
+Please try to follow 1PR <-> 1commit rule. Take help of https://gist.github.com/PalashBansal/59d8119be3c1e963f2fe1827857bc9ac to squash commits.
 
 Any contributions are highly appreciated ☺
 
