@@ -69,6 +69,7 @@ function addObstacleImages() {
   document
     .getElementById("ws8img")
     .setAttribute("src", "meta/opponent" + getRandomNumber(1, 4) + ".png");
+  document.getElementById("bestS").innerHTML = bestScore;
 }
 
 function Game(e) {
@@ -86,7 +87,6 @@ function Game(e) {
 			bestScore=parseInt(CookieScore, 10);//Cookie
 			alert(bestScore + "af2");
 		}*/
-    document.getElementById("bestS").innerHTML = bestScore;
     SendObstacles();
     CollisionDetection();
     ScoreTimer();
