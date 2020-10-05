@@ -482,22 +482,30 @@ function createCookie()
 
 
 function CopyBtnClick(flag) {
-	var flagString;
+	var flagString, buttonId;
 	if(flag==1)
+	{
 		flagString="btc";
+		buttonId="myTooltip1";
+	}
 	else
+	{
 		flagString="email";
+		buttonId="myTooltip2";
+	}
 	var range = document.createRange();
 	range.selectNode(document.getElementById(flagString));
 	window.getSelection().removeAllRanges(); 
 	window.getSelection().addRange(range); 
 	document.execCommand("copy");
 	window.getSelection().removeAllRanges();
-	var tooltip = document.getElementById("myTooltip");
+	var tooltip = document.getElementById(buttonId);
 	tooltip.innerHTML = "Copied: " + range;
   }
   
   function TooltipOutFunc() {
-	var tooltip = document.getElementById("myTooltip");
-	tooltip.innerHTML = "Copy to clipboard!";
+	var tooltip1 = document.getElementById("myTooltip1");
+	var tooltip2 = document.getElementById("myTooltip2");
+	tooltip1.innerHTML = "Copy to clipboard!";
+	tooltip2.innerHTML = "Copy to clipboard!";
   }
