@@ -88,6 +88,23 @@ onmousemove = function(e)
 	}
 }
 
+onkeydown = function(e) 
+{
+	if (1==play) {
+		const amountOfSpace = 15;
+		if (e.keyCode === 37 || e.keyCode === 65) { // left
+			redX = Math.max(450, redX - amountOfSpace);
+		} if(e.keyCode === 38 || e.keyCode === 87) { // up
+			redY = Math.max(200, redY - amountOfSpace);
+		} if(e.keyCode === 39 || e.keyCode === 68) { // right
+			redX = Math.min(950-redWidth, redX + amountOfSpace);
+		} if(e.keyCode === 40 || e.keyCode === 83) { // down
+			redY = Math.min(600 - redHeight, redY + amountOfSpace);
+		}
+		document.getElementById('Pacman').setAttribute("style","position:absolute; top:" + redY + "px; left:" + redX + "px; width:" + redWidth + "px; height:" + redHeight + "px; background-color:#ff0000; border-radius:" + redWidth/2 + "px; z-index:0; cursor:none");	
+	}
+}
+
 var fps_value;
 
 function fpsStart()
