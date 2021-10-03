@@ -40,25 +40,12 @@ function Game(e) /*Game entry point*/
 	if(0==play)
 	{
 		play=1;
-		/*var CookieScore = getCookieValue("CollisionBestScore");//Cookie
-		if(CookieScore=="")
-		{
-			createCookie();//Cookie
-			alert(CookieScore + "af1");
-		}
-		else
-		{
-			bestScore=parseInt(CookieScore, 10);//Cookie
-			alert(bestScore + "af2");
-		}*/
 		SendObstacles();
 		CollisionDetection();
 		ScoreTimer();
 		BestScoreChecker();
 		//fpsStart();
 	}
-	/*if(1==changeCookie)
-		createCookie();//Cookie*/
 }
 
 onmousedown = function(e)
@@ -465,38 +452,10 @@ function BestScoreChecker()
 			bestScore=currentScore;
       		localStorage.setItem("best-score", currentScore);
 			document.getElementById("bestS").innerHTML=bestScore;
-			// changeCookie=1;
 		}
 		BestScoreChecker();
 	}, delay);
 }
-
-//Cookie Code
-//http://www.w3schools.com/js/js_cookies.asp
-
-/*function getCookieValue(cname) {
-    var name = cname + "=";
-    var ca = document.cookie.split(',');
-    for(var i=0; i<ca.length; i++) {
-        var c = ca[i];
-		alert(c + "gg" + i);
-        while (c.charAt(0)==' ') c = c.substring(1);
-        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
-    }
-    return "";
-}
-
-function createCookie()
-{
-	var cname="CollisionBestScore", cvalue=bestScore;
-    var d = new Date();
-    d.setTime(d.getTime() + (10000*24*60*60*1000));
-    var expires = "expires="+d.toUTCString();
-	//alert( cname + "=" + cvalue + "; " + expires);
-    document.cookie = cname + "=" + cvalue + "; " + expires;
-}*/
-//todo Cookies,favicon,share,donate
-
 
 function CopyBtnClick(flag) {
 	var flagString, buttonId;
