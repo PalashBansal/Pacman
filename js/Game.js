@@ -5,6 +5,7 @@ var redY=405; // Top of red ball
 var redRadius=20;
 var redWidth=redRadius;
 var redHeight=redRadius; // Always keep width and height same
+var foodRadius=20;
 var currentScore=0;
 var bestScore = Number(localStorage.getItem("best-score")) || 0; // from session-storage
 var pageReloadfromServer=true;//false means page reload from cache
@@ -12,8 +13,9 @@ var pageReloadfromServer=true;//false means page reload from cache
 const gameOverShowTime = 3000;
 const gameOverHideTime = 1500;
 
-function addObstacleImages()
-{
+function pageLoadEvent()
+{	
+	//add obstacle images
 	document.getElementById('wcimg').setAttribute("src","meta/opponent" + getRandomNumber(1,4) + ".png");
 	document.getElementById('wd1img').setAttribute("src","meta/opponent" + getRandomNumber(1,4) + ".png");
 	document.getElementById('wd2img').setAttribute("src","meta/opponent" + getRandomNumber(1,4) + ".png");
@@ -33,7 +35,12 @@ function addObstacleImages()
 	document.getElementById('ws6img').setAttribute("src","meta/opponent" + getRandomNumber(1,4) + ".png");
 	document.getElementById('ws7img').setAttribute("src","meta/opponent" + getRandomNumber(1,4) + ".png");
 	document.getElementById('ws8img').setAttribute("src","meta/opponent" + getRandomNumber(1,4) + ".png");
-  	document.getElementById("bestS").innerHTML = bestScore;
+  	
+	//set best score
+	document.getElementById("bestS").innerHTML = bestScore;
+	
+	//hide food
+	document.getElementById("foodImg").style.display = "none";
 }
 
 function Game(e) /*Game entry point*/
@@ -45,6 +52,7 @@ function Game(e) /*Game entry point*/
 		CollisionDetection();
 		ScoreTimer();
 		BestScoreChecker();
+		FoodManager();
 		//fpsStart();
 	}
 }
@@ -318,12 +326,13 @@ function CollisionDetection()
 	DetectCollision("whiteSquare6");
 	DetectCollision("whiteSquare7");
 	DetectCollision("whiteSquare8");
+	DetectCollision("food");
 }
 
 function DetectCollision(id)
 {
 	var x1, y1, x2, y2; //centre points(not top,left)
-	var dia, typeOfCollision, isCollision=false;
+	var dia, typeOfCollision=-1, isCollision=false;
 	var rect_width, rect_height;
 	if(play==1)
 	{
@@ -359,6 +368,16 @@ function DetectCollision(id)
 				x2=ws7_left_sourceMain+12, y2=ws7_top_sourceMain+12, rect_width=25, rect_height=25, typeOfCollision=1;
 			else if(id=="whiteSquare8")
 				x2=ws8_left_sourceMain+12, y2=ws8_top_sourceMain+12, rect_width=25, rect_height=25, typeOfCollision=1;
+			else if(id=="food" && isFoodVisible==true)
+			{
+				typeOfCollision=-1;
+				var isFoodCollision = CircleCircleCollisionCondtion(x1, y1, foodLocationX+foodRadius/2, foodLocationY+foodRadius/2, foodRadius/2+redRadius/2);
+				if(isFoodCollision)
+				{
+					alert("bonuss")
+					AddBonusScore();
+				}
+			}
 			if(typeOfCollision==0)
 				isCollision=CircleCircleCollisionCondtion(x1, y1, x2, y2, dia);
 			else if(typeOfCollision==1)
@@ -398,6 +417,66 @@ function CollisionDetected()
 	document.getElementById("fps").innerHTML = "FPS:0";
 	document.getElementById("fpsdiv").setAttribute("style", "position:absolute; top:160px; left:450px;");
 	callBlink();
+}
+
+var foodLocationX = 0, foodLocationY = 0;
+var foodAppearTime = 0, foodDisappearTime = 0;
+var foodBonusScore = 0;
+
+var foodAppearStart = 0;
+var isFoodVisible = false;
+
+function FoodManager()
+{
+	ResetFoodData();
+	ProcessFood();
+}
+
+function ResetFoodData()
+{
+	foodLocationX = getRandomNumber((450+(foodRadius/2)), (950-(foodRadius/2)));
+	foodLocationY = getRandomNumber((200+(foodRadius/2)), (600-(foodRadius/2)));
+	foodAppearTime = getRandomNumber(10, 20);//10, 20
+	foodDisappearTime = getRandomNumber(3, 6);//3, 6
+	foodAppearTime *= 1000;
+	foodDisappearTime *= 1000;
+	foodAppearStart = 0;
+	foodBonusScore =  Math.floor(Math.sqrt(currentScore));
+	isFoodVisible=false;
+}
+
+function ProcessFood()
+{
+	if(1==play)
+	{
+		var delay=1000;
+		setTimeout(function(){
+			foodAppearStart+=1000;
+			if(isFoodVisible == true)
+			{
+				if(foodAppearStart == foodAppearTime+foodDisappearTime)
+				{
+					isFoodVisible = false;
+					ResetFoodData();
+					document.getElementById("foodImg").style.display = "none";
+				}
+			}
+			else if(!isFoodVisible && (foodAppearStart == foodAppearTime))
+			{
+				isFoodVisible = true;
+				document.getElementById("foodImg").style.display = "block";
+				document.getElementById("foodImg").style.left = foodLocationX + "px";
+				document.getElementById("foodImg").style.top = foodLocationY + "px";
+			}
+			ProcessFood();
+		}, delay);
+	}
+}
+
+function AddBonusScore()
+{
+	currentScore+=foodBonusScore;
+	ResetFoodData();
 }
 
 // Blinks the game over display text
