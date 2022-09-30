@@ -77,7 +77,13 @@ onmousemove = function(e)
 
 onkeydown = function(e) 
 {
-	if (1==play) {
+	if(0==play && (e.keyCode === 37 || e.keyCode === 65 || e.keyCode === 38 || e.keyCode === 87 ||
+		e.keyCode === 39 || e.keyCode === 68 || e.keyCode === 40 || e.keyCode === 83))
+	{
+		Game();
+	}		
+	if (1==play)
+	{
 		const amountOfSpace = 15;
 		if (e.keyCode === 37 || e.keyCode === 65) { // left
 			redX = Math.max(450, redX - amountOfSpace);
