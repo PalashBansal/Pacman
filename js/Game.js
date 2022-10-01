@@ -373,10 +373,7 @@ function DetectCollision(id)
 				typeOfCollision=-1;
 				var isFoodCollision = CircleCircleCollisionCondtion(x1, y1, foodLocationX+foodRadius/2, foodLocationY+foodRadius/2, foodRadius/2+redRadius/2);
 				if(isFoodCollision)
-				{
-					alert("bonuss")
 					AddBonusScore();
-				}
 			}
 			if(typeOfCollision==0)
 				isCollision=CircleCircleCollisionCondtion(x1, y1, x2, y2, dia);
@@ -436,8 +433,8 @@ function ResetFoodData()
 {
 	foodLocationX = getRandomNumber((450+(foodRadius/2)), (950-(foodRadius/2)));
 	foodLocationY = getRandomNumber((200+(foodRadius/2)), (600-(foodRadius/2)));
-	foodAppearTime = getRandomNumber(10, 20);//10, 20
-	foodDisappearTime = getRandomNumber(3, 6);//3, 6
+	foodAppearTime = getRandomNumber(10, 20);
+	foodDisappearTime = getRandomNumber(3, 6);
 	foodAppearTime *= 1000;
 	foodDisappearTime *= 1000;
 	foodAppearStart = 0;
@@ -464,11 +461,35 @@ function ProcessFood()
 			else if(!isFoodVisible && (foodAppearStart == foodAppearTime))
 			{
 				isFoodVisible = true;
+				BlinkFood();
 				document.getElementById("foodImg").style.display = "block";
 				document.getElementById("foodImg").style.left = foodLocationX + "px";
 				document.getElementById("foodImg").style.top = foodLocationY + "px";
 			}
 			ProcessFood();
+		}, delay);
+	}
+}
+
+var isFoodTempVisible = false;
+
+function BlinkFood()
+{
+	if(isFoodVisible)
+	{
+		var delay=300;
+		setTimeout(function(){
+			if(isFoodTempVisible)
+			{
+				isFoodTempVisible=false;
+				document.getElementById("foodImg").style.display = "none";
+			}
+			else
+			{
+				isFoodTempVisible=true;
+				document.getElementById("foodImg").style.display = "block";
+			}
+			BlinkFood();
 		}, delay);
 	}
 }
