@@ -1,4 +1,4 @@
-var play=0; // Start and Stop game trigger
+var play=0; // Start and Stop game trigger. 0 is Game can start; 1 means Game running; 2 means Game over
 //Pacman(red dot previously in game)
 var redX=705; // Left of red ball
 var redY=405; // Top of red ball
@@ -7,6 +7,7 @@ var redWidth=redRadius;
 var redHeight=redRadius; // Always keep width and height same
 var currentScore=0;
 var bestScore = Number(localStorage.getItem("best-score")) || 0; // from session-storage
+var pageReloadfromServer=true;//false means page reload from cache
 
 const gameOverShowTime = 3000;
 const gameOverHideTime = 1500;
@@ -52,8 +53,7 @@ onmousedown = function(e)
 {
 	if(2==play && (window.event.which==1)/*detects left click*/ && e.clientX>=450 && e.clientX<=950 && e.clientY>=200 && e.clientY<=600)
 	{
-		var fromServer=true;//false means page reload from cache
-		location.reload(fromServer);
+		location.reload(pageReloadfromServer);
 	}
 }
 
@@ -89,6 +89,10 @@ onkeydown = function(e)
 			redY = Math.min(600 - redHeight, redY + amountOfSpace);
 		}
 		document.getElementById('Pacman').setAttribute("style","position:absolute; top:" + redY + "px; left:" + redX + "px; width:" + redWidth + "px; height:" + redHeight + "px; background-color:#ff0000; border-radius:" + redWidth/2 + "px; z-index:0; cursor:none");	
+	}
+	if(2==play && e.keyCode === 82)
+	{
+		location.reload(pageReloadfromServer);
 	}
 }
 
@@ -381,7 +385,7 @@ function CircleCircleCollisionCondtion(x1, y1, x2, y2, dia)
 function CollisionDetected()
 {
 	play=2;
-	document.getElementById("ssmsg").innerHTML = "\u263a Left click in game window to reload game.";
+	document.getElementById("ssmsg").innerHTML = "\u263a Left click in game window(or press 'R'/'r') to reload game.";
 	document.getElementById("currS").setAttribute("style", "text-align:justify;text-align:center;color:#ffffff;font-size:20px");
 	document.getElementById("bestS").setAttribute("style", "text-align:justify;text-align:center;color:#ffffff;font-size:20px");
 	document.getElementById("ssmsgdiv").setAttribute("style", "position:absolute; max-width:300px; top:420px; left:139px;");
