@@ -1,7 +1,7 @@
 # Pacman
 Game based on collision detection.
 
-Play game at- http://palashbansal.github.io/Collision
+Play game at- http://palashbansal.github.io/Pacman
 
 I created this game in my spare time after getting inspired from the famous Escapa game- https://space.mit.edu/~linares/game.htm
 However, game has changed a lot since and you may not get essence of the escapa game.
