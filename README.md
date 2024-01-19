@@ -1,4 +1,4 @@
-# Collision
+# Pacman
 Game based on collision detection.
 
 Play game at- http://palashbansal.github.io/Collision
